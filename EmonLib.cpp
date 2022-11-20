@@ -227,7 +227,6 @@ void EnergyMonitor::serialprint()
 //and Jérôme who alerted us to http://provideyourown.com/2012/secret-arduino-voltmeter-measure-battery-voltage/
 
 long EnergyMonitor::readVcc() {
-  long result;
 
   //not used on emonTx V3 - as Vcc is always 3.3V - eliminates bandgap error and need for calibration http://harizanov.com/2013/09/thoughts-on-avr-adc-accuracy/
 
@@ -247,6 +246,7 @@ long EnergyMonitor::readVcc() {
 
 
   #if defined(__AVR__)
+  long result;
   delay(2);                                        // Wait for Vref to settle
   ADCSRA |= _BV(ADSC);                             // Convert
   while (bit_is_set(ADCSRA,ADSC));
